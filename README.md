@@ -1,12 +1,12 @@
 # 📖 Learning
 
-A collection of structured, self-paced deep-dive courses for programming languages, databases, cloud platforms, and container tooling — built for interview prep and professional upskilling.
+A collection of structured, self-paced deep-dive courses for programming languages, databases, cloud platforms, container tooling, and web frameworks — built for interview prep and professional upskilling.
 
 ---
 
 ## 🗂️ Courses
 
-### Languages
+### 🐍 Languages
 
 | Course | Focus | Modules |
 |--------|-------|---------|
@@ -16,13 +16,13 @@ A collection of structured, self-paced deep-dive courses for programming languag
 | [JavaScript](./javascript/) | Core JS, event loop, DOM, Node, npm, tooling, production | 17 |
 | [TypeScript](./typescript/) | Type system, generics, mapped/utility types, real-world patterns | 16 |
 
-### Databases
+### 🗄️ Databases
 
 | Course | Focus | Modules |
 |--------|-------|---------|
 | [MySQL](./mysql/) | Relational model, joins, indexes, transactions, replication, ops | 17 |
 
-### Cloud & Infrastructure
+### ☁️ Cloud & Infrastructure
 
 | Course | Focus | Modules |
 |--------|-------|---------|
@@ -30,6 +30,21 @@ A collection of structured, self-paced deep-dive courses for programming languag
 | [Azure](./azure/) | Entra ID, RBAC, VNets, Storage, Functions, Bicep, CAF | 18 |
 | [Docker](./docker/) | Images, Dockerfiles, Compose, registries, multi-arch, security | 16 |
 | [Kubernetes](./kubernetes/) | Pods, Services, RBAC, scheduling, autoscaling, operators, GitOps | 18 |
+
+### 🧩 Backend Frameworks
+
+| Course | Language | Focus | Modules |
+|--------|----------|-------|---------|
+| [Spring Boot](./springboot/) | Java | DI, web layer, JPA, security, testing, Actuator, production | 17 |
+| [Django](./django/) | Python | MTV, ORM, forms, admin, DRF, security, deployment | 16 |
+| [FastAPI](./fastapi/) | Python | Pydantic v2, DI, async, SQLAlchemy 2.0, OpenAPI, production | 15 |
+| [Gin](./gin/) | Go | Routing, middleware, binding, context, testing, observability | 15 |
+
+### 🎨 Frontend / Full-stack Frameworks
+
+| Course | Focus | Modules |
+|--------|-------|---------|
+| [Next.js](./nextjs/) | App Router, RSC, Server Actions, caching, auth, deployment | 17 |
 
 ---
 
@@ -44,14 +59,17 @@ Each course lives in its own folder. Start with `00_roadmap.md` for an overview,
 5. **Common Mistakes & Gotchas**
 6. **Key Takeaways** — senior-engineer lens
 
-Suggested pacing: one module per day for languages and databases (~3 weeks each), one module every 1–2 days for cloud and Kubernetes (~3–5 weeks each).
+Suggested pacing: roughly one module per day for languages, databases, and frameworks (~2–3 weeks each), one module every 1–2 days for cloud and Kubernetes (~3–5 weeks each).
 
-### Suggested Learning Paths
+### 🛤️ Suggested Learning Paths
 
-- **Backend engineer:** Go or Python → MySQL → Docker → Kubernetes → AWS or Azure
-- **Frontend → fullstack:** JavaScript → TypeScript → Node sections → Docker → one cloud
+- **Java backend:** Go or Python → MySQL → Spring Boot → Docker → Kubernetes → AWS or Azure
+- **Python backend:** Python → MySQL → FastAPI **or** Django → Docker → Kubernetes → one cloud
+- **Go backend:** Go → MySQL → Gin → Docker → Kubernetes → one cloud
+- **Fullstack JS/TS:** JavaScript → TypeScript → Next.js → Docker → one cloud
 - **Systems / performance:** Rust → Docker → Kubernetes
-- **Cloud / DevOps:** Docker → Kubernetes → AWS → Azure
+- **Cloud / DevOps:** Docker → Kubernetes → AWS → Azure → IaC modules in both
+- **Interview cram:** Pick your language → MySQL → one framework → revisit interview Q&A sections
 
 ---
 
