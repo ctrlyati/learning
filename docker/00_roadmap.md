@@ -1,120 +1,118 @@
-# 00 — Docker Deep-Dive Roadmap
+# Docker Deep Dive — Interview Prep Course
 
-> **Goal:** Take a working developer from "I've run `docker run`" to confidently building, shipping, and securing containerized workloads in production — and primed to step into Kubernetes.
-
----
-
-## Who this is for
-
-You write code for a living. You've probably typed `docker run hello-world` at some point. You can navigate a Linux shell, know what a process is, and can read a Dockerfile without panicking. You want the *real* model — not just commands, but **why containers work the way they do**, so that when something breaks at 2am you can reason about it instead of cargo-culting Stack Overflow answers.
-
-This course is professional upskilling material. It's opinionated, command-heavy, and unapologetically Linux-centric (Docker Desktop on macOS / Windows is covered, but the truth is on Linux).
+> **By the end of this course**, you'll understand Docker from the ground up — how containers work, how to build and ship images, manage networks, volumes, multi-container apps, security, CI/CD integration, and orchestration. You'll be ready to answer any Docker question an interviewer throws at you.
 
 ---
 
-## Module table
+## Module Table
 
-| #  | File | Topic | Why it matters |
-|----|------|-------|----------------|
-| 01 | [`01_intro_and_setup.md`](./01_intro_and_setup.md) | Containers vs VMs, Docker architecture, install | Foundational mental model |
-| 02 | [`02_images_and_containers.md`](./02_images_and_containers.md) | `pull/run/exec/stop/rm`, layers, lifecycle | Day-1 fluency |
-| 03 | [`03_dockerfile_fundamentals.md`](./03_dockerfile_fundamentals.md) | `FROM`, `RUN`, `COPY`, `CMD` vs `ENTRYPOINT` | You can't ship without this |
-| 04 | [`04_building_images.md`](./04_building_images.md) | `docker build`, context, `.dockerignore`, tags | Builds that aren't 3 GB |
-| 05 | [`05_layer_caching_multistage.md`](./05_layer_caching_multistage.md) | Cache ordering, BuildKit, multi-stage | Fast, lean images |
-| 06 | [`06_volumes_and_mounts.md`](./06_volumes_and_mounts.md) | Volumes, bind mounts, tmpfs, ownership | Don't lose data |
-| 07 | [`07_networking.md`](./07_networking.md) | Bridge, host, none, DNS, port publishing | How containers talk |
-| 08 | [`08_docker_compose.md`](./08_docker_compose.md) | Services, networks, profiles, healthchecks | Multi-container apps |
-| 09 | [`09_registries_distribution.md`](./09_registries_distribution.md) | Hub, GHCR, ECR/ACR/GAR, auth | Shipping artifacts |
-| 10 | [`10_image_optimization.md`](./10_image_optimization.md) | Distroless, alpine, scratch, scanning | Size + security |
-| 11 | [`11_multiarch_builds.md`](./11_multiarch_builds.md) | `buildx`, QEMU, manifests | amd64 + arm64 |
-| 12 | [`12_runtime_internals.md`](./12_runtime_internals.md) | Namespaces, cgroups, OCI, runc | What's *really* happening |
-| 13 | [`13_security.md`](./13_security.md) | Rootless, caps, seccomp, cosign, SBOM | Don't ship CVEs |
-| 14 | [`14_observability.md`](./14_observability.md) | Logs, healthchecks, stats, metrics | Production visibility |
-| 15 | [`15_cicd_with_docker.md`](./15_cicd_with_docker.md) | Pipelines, caching, scanning gates | Automating builds |
-| 16 | [`16_production_and_next.md`](./16_production_and_next.md) | Compose vs Swarm vs K8s, footguns | The transition |
-
----
-
-## Timeline
-
-One module per day is the sweet spot — **~2.5 weeks** to finish. Each module is 30-60 minutes reading plus 30-90 minutes of hands-on work. Don't skip the hands-on parts; Docker is a tactile subject and your fingers need to learn the commands.
-
-| Pace | Duration | Profile |
-|------|----------|---------|
-| 1 module/day | 16 days | Recommended — sustainable, retention sticks |
-| 2 modules/day | 8 days | Crunch mode (job interview next week) |
-| 1 module/week | 4 months | Background pace alongside other work |
-
-A good completion test: at the end, you can take an unfamiliar repo, write a multi-stage Dockerfile for it, push to GHCR via GitHub Actions, and deploy it with Compose — without Googling.
+| # | Title | Key Focus Areas |
+|---|-------|----------------|
+| 01 | Introduction to Containerization | VMs vs containers, why Docker, the Linux primitives underneath, Docker architecture |
+| 02 | Installing & Setting Up Docker | Docker Desktop, Docker Engine on Linux, verifying setup, daemon config |
+| 03 | Images & Containers | What an image is, layers, `docker run`, container lifecycle, key CLI commands |
+| 04 | Dockerfile Fundamentals | FROM, RUN, COPY, CMD, ENTRYPOINT, ENV, EXPOSE, ARG |
+| 05 | Advanced Dockerfiles | Multi-stage builds, layer caching, .dockerignore, image size optimization |
+| 06 | Volumes & Persistent Storage | Bind mounts vs volumes vs tmpfs, `docker volume`, data persistence patterns |
+| 07 | Docker Networking | Bridge, host, overlay, none networks; port mapping; DNS; custom networks |
+| 08 | Docker Compose | `docker-compose.yml`, services, depends_on, health checks, profiles |
+| 09 | Registry & Image Management | Docker Hub, private registries, tagging, pushing/pulling, image pruning |
+| 10 | Container Lifecycle & Resource Management | Start/stop/restart policies, CPU/memory limits, health checks, `docker stats` |
+| 11 | Docker Security | Least privilege, non-root users, read-only filesystems, secrets management, scanning |
+| 12 | Docker in CI/CD | GitHub Actions, GitLab CI, build caching in pipelines, multi-arch builds |
+| 13 | Docker Swarm | Swarm mode, services vs containers, replicas, rolling updates, stacks |
+| 14 | Introduction to Kubernetes | How K8s relates to Docker, pods, deployments, services, why K8s replaced Swarm |
+| 15 | Monitoring & Logging | `docker logs`, log drivers, cAdvisor, Prometheus, Grafana integration |
+| 16 | Docker Best Practices & Patterns | 12-factor apps, sidecar pattern, init containers, distroless images |
+| 17 | Real-world Project: Containerizing a Full-stack App | Node.js API + PostgreSQL + Nginx, Compose, production vs dev configs |
+| 18 | Interview Q&A — 60 Common Docker Questions | Grouped by topic: concepts, Dockerfile, networking, security, orchestration |
 
 ---
 
-## Prerequisites
+## Suggested Timeline
 
-- **Linux CLI basics** — `cd`, `ls`, `cat`, `grep`, pipes, `ps`, `kill`, `chmod`. If `sudo` and PATH are foreign, do a quick Linux intro first.
-- **Any one programming language** — examples use Python, Node.js, and Go interchangeably. You don't need to know all three; just be able to read them.
-- **Git** — you'll clone example repos and read Dockerfiles in the wild.
-- **A machine that can run Docker** — Linux native is best, but Docker Desktop on macOS or Windows (with WSL2) is fine. Module 01 covers setup.
+| Pace | Schedule |
+|------|----------|
+| Intensive | 2 modules/day → done in **9 days** |
+| Comfortable | 1 module/day → done in **18 days** |
+| Part-time | 3 modules/week → done in **6 weeks** |
 
-You do **not** need to know: Kubernetes, cloud providers, Go internals, or "DevOps." Those grow naturally out of containers — don't put the cart before the horse.
-
----
-
-## Core mental models
-
-If you forget every command in this course but internalize these six ideas, you'll still be ahead of 80% of working developers:
-
-### 1. Containers are processes, not VMs
-A container is a Linux process (or process tree) running on your host kernel, isolated by **namespaces** and constrained by **cgroups**. There is no guest OS. `docker run nginx` is closer to `nginx &` than it is to "boot a virtual machine." Internalize this and half of Docker stops being magic.
-
-### 2. Images are layered, immutable, content-addressable
-An image is a stack of read-only filesystem layers identified by SHA-256 hashes. Layers are shared between images, cached aggressively, and never modified — when you "change" an image, you build a new one on top. This is why image storage is efficient and rebuilds are fast (when you order your Dockerfile correctly).
-
-### 3. The build context matters
-`docker build .` ships the entire current directory to the daemon. If your `.git` folder is 4 GB and you forgot `.dockerignore`, your build is now 4 GB slower. The context is **not** "where Docker reads files from at runtime" — it's "the tarball Docker uploads to the build engine before it can do anything."
-
-### 4. One process per container (by convention)
-You *can* run init, cron, sshd, and your app in one container. You *shouldn't*. The convention is one container = one concern, because it makes logs sane, restarts cheap, scaling sensible, and lifecycle obvious. If you need multiple processes, you probably want Compose, not a fatter container.
-
-### 5. Networking is just iptables underneath
-Docker's bridge networks, port publishing, and DNS are implemented with Linux bridges, veth pairs, iptables NAT rules, and an embedded DNS server. There's no special "Docker network protocol." If you can read `iptables -t nat -L`, you can debug any Docker networking issue.
-
-### 6. Secrets are not environment variables
-`ENV API_KEY=...` in a Dockerfile bakes the secret into a layer **forever**, visible to anyone with `docker pull` access. Compose `environment:` blocks land in process listings. Real secrets go through Docker secrets, runtime mounts, or your platform's secret manager. The whole industry learns this lesson the hard way; you can skip the hard way.
+**Recommendation for interview prep:** 1 module/day + spend the last 2 days reviewing Module 18 and practicing answers out loud.
 
 ---
 
-## External resources
+## How to Use This Course
 
-Bookmark these. The official docs are surprisingly good and you'll come back to them constantly.
-
-- **[docs.docker.com](https://docs.docker.com/)** — the canonical reference; Dockerfile spec and CLI docs are first-rate.
-- **[Docker Deep Dive](https://nigelpoulton.com/books/docker-deep-dive/) by Nigel Poulton** — the book this course is spiritually descended from; great paired reading.
-- **[Play with Docker](https://labs.play-with-docker.com/)** — free in-browser Docker playground; useful when your machine can't run Docker (corporate laptops, etc).
-- **[OCI Specifications](https://github.com/opencontainers/runtime-spec)** — Image Spec, Runtime Spec, Distribution Spec. Skim once; reread when something weird happens.
-- **[BuildKit documentation](https://docs.docker.com/build/buildkit/)** — the modern build engine; everything in Module 05+ relies on it.
-- **[Docker Captains](https://www.docker.com/captains/)** — community experts whose blogs and talks are gold. Bret Fisher and Nigel Poulton in particular.
+1. **Start with Module 01** even if you've seen Docker before — the conceptual foundation matters for interviews.
+2. **Type the commands yourself.** Don't just read — open a terminal and run everything. Muscle memory counts.
+3. **Each module ends with interview Q&A.** Read them, then close the file and try to answer from memory.
+4. **Module 18** is your final review — use it 1–2 days before your interview as a rapid-fire drill.
+5. **Module 17** (the project) should be built locally so you have something concrete to talk about.
 
 ---
 
-## What comes after this course
+## Prerequisites & Setup
 
-Docker is the foundation. Once you've finished Module 16, the natural next mountain is **orchestration**: how do you run hundreds of these containers across a fleet of servers, with health checks, autoscaling, rolling updates, and self-healing?
+**What you should know first:**
+- Basic command-line comfort (cd, ls, cat, grep)
+- A general idea of what a "server" is
+- Basic understanding of what an application is (no coding required to start)
 
-That's Kubernetes. We've intentionally drawn the line at "production-ready single-host Docker + Compose" in this course because Kubernetes is its own beast. When you're ready:
-
-→ **[`../kubernetes/00_roadmap.md`](../kubernetes/00_roadmap.md)** *(companion course)*
-
-You'll find that 80% of your Docker knowledge transfers directly — pods are still containers, images still come from registries, networking is still namespaces. Kubernetes adds orchestration on top; it doesn't replace what you've learned here.
+**What to install:**
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Mac/Windows) — includes Docker Engine + Compose
+- On Linux: `curl -fsSL https://get.docker.com | sh` then `sudo usermod -aG docker $USER`
+- Verify: `docker --version` and `docker compose version`
+- Optional: [VS Code Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
 ---
 
-## A closing word on professional upskilling
+## Core Mental Models
 
-Containers are the most leveraged piece of infrastructure knowledge you can pick up as a developer in this decade. Cloud, CI/CD, microservices, edge compute, ML serving — they all run on containers. Becoming the person on your team who *actually understands* Docker (not just types commands) pays back compounding interest for years.
+These 5 ideas run through the entire course. Return to them whenever something feels confusing.
 
-Don't just read the modules. Build something. Break it. Read the error. Fix it. That's the loop.
+1. **Images are blueprints; containers are running instances.** Like a class vs an object in OOP — the image is immutable, containers are ephemeral by default.
 
-Let's go.
+2. **Every Docker layer is a diff.** Images are built as a stack of read-only layers. The container adds one writable layer on top. This is why image size and layer count matter.
 
-*[next → 01_intro_and_setup](./01_intro_and_setup.md)*
+3. **Containers are isolated Linux processes.** Not VMs. Docker uses Linux kernel features — namespaces (isolation) and cgroups (resource limits) — to make a regular process feel like its own machine.
+
+4. **The Docker daemon does the heavy lifting.** The `docker` CLI is just a client that sends commands to the daemon (`dockerd`) via a Unix socket. The daemon manages containers, images, networks, and volumes.
+
+5. **Networking is just virtual switches.** Docker creates virtual networks (bridges) that containers connect to. Port mapping is NAT from the host into a container's network namespace.
+
+---
+
+## External Resources
+
+- 📖 [Official Docker Docs](https://docs.docker.com/) — the canonical reference, keep it open
+- 🎓 [Play with Docker](https://labs.play-with-docker.com/) — free browser-based Docker playground, no install needed
+- 📘 [Docker Deep Dive (book) — Nigel Poulton](https://nigelpoulton.com/books/) — the clearest Docker book for beginners
+- 🎥 [TechWorld with Nana — Docker Tutorial](https://www.youtube.com/watch?v=3c-iBn73dDE) — popular 3-hour video walkthrough
+- 🛠 [Dockerfile Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) — official guide, essential reading before interviews
+- 🔍 [dive](https://github.com/wagoodman/dive) — CLI tool to inspect image layers, great for optimization
+
+---
+
+Good luck with the interviews! Docker is one of the highest-signal skills you can demonstrate — knowing it well (not just the commands, but *why* it works) sets you apart. Let's go.
+
+---
+
+### Modules
+- [01 — Introduction to Containerization](./01_introduction_containerization.md)
+- [02 — Installing & Setting Up Docker](./02_installing_docker.md)
+- [03 — Images & Containers](./03_images_containers.md)
+- [04 — Dockerfile Fundamentals](./04_dockerfile_fundamentals.md)
+- [05 — Advanced Dockerfiles](./05_advanced_dockerfiles.md)
+- [06 — Volumes & Persistent Storage](./06_volumes_storage.md)
+- [07 — Docker Networking](./07_networking.md)
+- [08 — Docker Compose](./08_docker_compose.md)
+- [09 — Registry & Image Management](./09_registry_image_management.md)
+- [10 — Container Lifecycle & Resource Management](./10_lifecycle_resources.md)
+- [11 — Docker Security](./11_security.md)
+- [12 — Docker in CI/CD](./12_cicd.md)
+- [13 — Docker Swarm](./13_swarm.md)
+- [14 — Introduction to Kubernetes](./14_kubernetes_intro.md)
+- [15 — Monitoring & Logging](./15_monitoring_logging.md)
+- [16 — Best Practices & Patterns](./16_best_practices.md)
+- [17 — Real-world Project](./17_project.md)
+- [18 — Interview Q&A](./18_interview_qa.md)

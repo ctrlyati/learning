@@ -39,6 +39,8 @@ A collection of structured, self-paced deep-dive courses for programming languag
 | [Django](./django/) | Python | MTV, ORM, forms, admin, DRF, security, deployment | 16 |
 | [FastAPI](./fastapi/) | Python | Pydantic v2, DI, async, SQLAlchemy 2.0, OpenAPI, production | 15 |
 | [Gin](./gin/) | Go | Routing, middleware, binding, context, testing, observability | 15 |
+| [LangChain & LangGraph](./langchain-langgraph/) | Python | LCEL, tool calling, statecharts, persistence, multi-agent architectures, evals | 7 |
+| [NestJS](./nestjs/) | TypeScript | DI, modules, controllers, pipes, guards, testing, production | 17 |
 
 ### 🎨 Frontend / Full-stack Frameworks
 
@@ -65,20 +67,16 @@ Suggested pacing: roughly one module per day for languages, databases, and frame
 
 - **Java backend:** Go or Python → MySQL → Spring Boot → Docker → Kubernetes → AWS or Azure
 - **Python backend:** Python → MySQL → FastAPI **or** Django → Docker → Kubernetes → one cloud
+- **AI / Agentic backend:** Python → FastAPI → LangChain & LangGraph → Docker → one cloud
 - **Go backend:** Go → MySQL → Gin → Docker → Kubernetes → one cloud
-- **Fullstack JS/TS:** JavaScript → TypeScript → Next.js → Docker → one cloud
+- **Fullstack JS/TS:** JavaScript → TypeScript → NestJS **or** Next.js → Docker → one cloud
 - **Systems / performance:** Rust → Docker → Kubernetes
 - **Cloud / DevOps:** Docker → Kubernetes → AWS → Azure → IaC modules in both
 - **Interview cram:** Pick your language → MySQL → one framework → revisit interview Q&A sections
 
 ---
 
-## 🧪 Go Exercises
-
-The `golang/exercises/` folder contains hands-on practice problems (todo list, bug fixes, HTTP server, bank system). Per-exercise `done/` solution folders are git-ignored so you can solve them without spoilers.
-
----
-
 ## 🛠️ Contributing
 
 This is a personal learning repo. Feel free to fork it and adapt the material for your own study.
+
