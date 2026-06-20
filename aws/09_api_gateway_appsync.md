@@ -47,7 +47,7 @@ api.addRoutes({
 });
 
 // Cognito authorizer
-const authz = new HttpJwtAuthorizer("CognitoAuth", `https://cognito-idp.us-east-1.amazonaws.com/${userPool.userPoolId}`, {
+const authz = new HttpJwtAuthorizer("CognitoAuth", `https://cognito-idp.ap-southeast-1.amazonaws.com/${userPool.userPoolId}`, {
   jwtAudience: [appClient.userPoolClientId],
 });
 api.addRoutes({
@@ -171,7 +171,7 @@ Server-side push: backend calls `PostToConnection` against a connection ID store
 
 ```python
 mgmt = boto3.client("apigatewaymanagementapi",
-                    endpoint_url=f"https://{api_id}.execute-api.us-east-1.amazonaws.com/prod")
+                    endpoint_url=f"https://{api_id}.execute-api.ap-southeast-1.amazonaws.com/prod")
 mgmt.post_to_connection(ConnectionId=conn_id, Data=b'{"event":"new_message"}')
 ```
 

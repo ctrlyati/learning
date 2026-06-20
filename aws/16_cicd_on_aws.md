@@ -207,7 +207,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::123456789012:role/gh-actions-deploy
-          aws-region: us-east-1
+          aws-region: ap-southeast-1
       - name: Login ECR
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build & push
@@ -304,7 +304,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::111:role/gh-actions-readonly
-          aws-region: us-east-1
+          aws-region: ap-southeast-1
       - run: npx cdk diff > diff.txt || true
       - uses: marocchino/sticky-pull-request-comment@v2
         with: { path: diff.txt }
@@ -319,7 +319,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::111:role/gh-actions-deploy-dev
-          aws-region: us-east-1
+          aws-region: ap-southeast-1
       - run: npx cdk deploy MyApp-Dev --require-approval never
 
   deploy-prod:
@@ -332,7 +332,7 @@ jobs:
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::222:role/gh-actions-deploy-prod
-          aws-region: us-east-1
+          aws-region: ap-southeast-1
       - run: npx cdk deploy MyApp-Prod --require-approval never
 ```
 

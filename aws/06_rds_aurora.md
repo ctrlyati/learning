@@ -96,9 +96,9 @@ Cross-region for DR; cross-account for handing data to another team.
 
 ```bash
 aws rds copy-db-snapshot \
-  --source-db-snapshot-identifier arn:aws:rds:us-east-1:123:snapshot:s1 \
+  --source-db-snapshot-identifier arn:aws:rds:ap-southeast-1:123:snapshot:s1 \
   --target-db-snapshot-identifier s1-dr \
-  --kms-key-id $DR_KMS_KEY --region us-west-2
+  --kms-key-id $DR_KMS_KEY --region ap-east-1
 ```
 
 ---
@@ -218,7 +218,7 @@ cluster.grantConnect(appRole, "app_user");
 ### Connecting from app code (IAM auth)
 ```python
 import boto3, psycopg2
-rds = boto3.client("rds", region_name="us-east-1")
+rds = boto3.client("rds", region_name="ap-southeast-1")
 token = rds.generate_db_auth_token(DBHostname=host, Port=5432, DBUsername="app_user")
 conn = psycopg2.connect(host=host, port=5432, user="app_user",
                        password=token, dbname="app", sslmode="require")

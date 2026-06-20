@@ -122,7 +122,7 @@ ap-southeast-1 = Singapore
 
 AZ names are scoped per-account — `us-east-1a` in your account may be a different physical AZ than `us-east-1a` in mine (AWS does this to balance load across AZs). To get the stable name, use the AZ ID (e.g., `use1-az1`):
 ```bash
-aws ec2 describe-availability-zones --region us-east-1 \
+aws ec2 describe-availability-zones --region ap-southeast-1 \
   --query "AvailabilityZones[].[ZoneName,ZoneId]" --output table
 ```
 
@@ -155,7 +155,7 @@ Bad for: anything you'll do twice, anything you need to reproduce, anything you 
 aws configure --profile sandbox
 # AWS Access Key ID:     AKIA...
 # AWS Secret Access Key: ****
-# Default region name:   us-east-1
+# Default region name:   ap-southeast-1
 # Default output format: json
 
 # Use it
@@ -190,7 +190,7 @@ This is why your Lambda just *works* without credentials — it picks up its exe
 #### Python (boto3)
 ```python
 import boto3
-s3 = boto3.client("s3", region_name="us-east-1")
+s3 = boto3.client("s3", region_name="ap-southeast-1")
 for b in s3.list_buckets()["Buckets"]:
     print(b["Name"])
 ```
@@ -198,14 +198,14 @@ for b in s3.list_buckets()["Buckets"]:
 #### Node.js (AWS SDK v3 — modular)
 ```javascript
 import { S3Client, ListBucketsCommand } from "@aws-sdk/client-s3";
-const s3 = new S3Client({ region: "us-east-1" });
+const s3 = new S3Client({ region: "ap-southeast-1" });
 const out = await s3.send(new ListBucketsCommand({}));
 console.log(out.Buckets.map(b => b.Name));
 ```
 
 #### Go (aws-sdk-go-v2)
 ```go
-cfg, _ := config.LoadDefaultConfig(ctx, config.WithRegion("us-east-1"))
+cfg, _ := config.LoadDefaultConfig(ctx, config.WithRegion("ap-southeast-1"))
 s3c := s3.NewFromConfig(cfg)
 out, _ := s3c.ListBuckets(ctx, &s3.ListBucketsInput{})
 for _, b := range out.Buckets { fmt.Println(*b.Name) }
@@ -244,7 +244,7 @@ aws ce get-cost-and-usage \
 aws ec2 create-tags --resources i-xxx --tags Key=project,Value=aws-course
 
 # 6. Set up a default region so you don't repeat --region everywhere
-export AWS_DEFAULT_REGION=us-east-1
+export AWS_DEFAULT_REGION=ap-southeast-1
 export AWS_PROFILE=sandbox
 ```
 

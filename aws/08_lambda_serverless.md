@@ -196,7 +196,7 @@ A built-in HTTPS endpoint per function — no API Gateway needed for the simples
 
 ```bash
 aws lambda create-function-url-config --function-name hello --auth-type NONE
-# returns https://xxx.lambda-url.us-east-1.on.aws/
+# returns https://xxx.lambda-url.ap-southeast-1.on.aws/
 ```
 
 Auth types: `NONE` (open), `AWS_IAM` (signed requests only). For anything with real users, use API Gateway or CloudFront for WAF, rate limiting, custom domains.

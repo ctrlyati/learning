@@ -58,13 +58,13 @@ VPC=vpc-0abc
 
 # Two public subnets (one per AZ)
 aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.1.0/24 \
-  --availability-zone us-east-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-a}]'
+  --availability-zone ap-southeast-1a --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-a}]'
 aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.2.0/24 \
-  --availability-zone us-east-1b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-b}]'
+  --availability-zone ap-southeast-1b --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-b}]'
 
 # Two private subnets
-aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.11.0/24 --availability-zone us-east-1a
-aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.12.0/24 --availability-zone us-east-1b
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.11.0/24 --availability-zone ap-southeast-1a
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.0.12.0/24 --availability-zone ap-southeast-1b
 
 # IGW
 IGW=$(aws ec2 create-internet-gateway --query InternetGateway.InternetGatewayId --output text)
@@ -148,7 +148,7 @@ By default, an EC2 instance in a private subnet calling `s3.amazonaws.com` goes 
 
 ```bash
 aws ec2 create-vpc-endpoint --vpc-id $VPC \
-  --service-name com.amazonaws.us-east-1.s3 \
+  --service-name com.amazonaws.ap-southeast-1.s3 \
   --route-table-ids $PRIV_RT
 ```
 
@@ -156,7 +156,7 @@ aws ec2 create-vpc-endpoint --vpc-id $VPC \
 
 ```bash
 aws ec2 create-vpc-endpoint --vpc-id $VPC \
-  --service-name com.amazonaws.us-east-1.secretsmanager \
+  --service-name com.amazonaws.ap-southeast-1.secretsmanager \
   --vpc-endpoint-type Interface \
   --subnet-ids subnet-priv-a subnet-priv-b \
   --security-group-ids $ENDPOINT_SG \

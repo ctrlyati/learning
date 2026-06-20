@@ -70,7 +70,7 @@ Use **Compute Optimizer** (free) — it watches CloudWatch metrics for 14+ days 
 
 ```bash
 aws compute-optimizer get-ec2-instance-recommendations \
-  --instance-arns arn:aws:ec2:us-east-1:123456789012:instance/i-xxx
+  --instance-arns arn:aws:ec2:ap-southeast-1:123456789012:instance/i-xxx
 ```
 
 ---
@@ -88,7 +88,7 @@ An AMI is a snapshot of a root volume + metadata (kernel, block device mapping, 
 ### Baking an AMI with Packer
 ```hcl
 source "amazon-ebs" "app" {
-  region        = "us-east-1"
+  region        = "ap-southeast-1"
   source_ami_filter {
     filters = { name = "al2023-ami-*-x86_64", state = "available" }
     owners  = ["amazon"]
@@ -131,7 +131,7 @@ Incremental, stored in S3 (you can't see the bucket), regional. Cross-region cop
 
 ```bash
 aws ec2 create-snapshot --volume-id vol-xxx --description "pre-upgrade"
-aws ec2 copy-snapshot --source-region us-east-1 --source-snapshot-id snap-xxx --region us-west-2
+aws ec2 copy-snapshot --source-region ap-southeast-1 --source-snapshot-id snap-xxx --region ap-east-1
 ```
 
 **EBS Snapshot Lifecycle Manager** (DLM) automates daily/weekly snapshots + retention.
@@ -263,7 +263,7 @@ EC2 Auto Scaling Groups support **mixed instance policies** — e.g., 30% on-dem
 - **Saving the .pem file in git.** Worst case scenario. AWS will detect and notify you, but the cat's out of the bag.
 - **Forgetting `DeleteOnTermination`** on EBS volumes. Terminated instance, orphaned volume, $$$ for years.
 - **Snapshots forever.** Snapshots are incremental but bill per-GB-month. Set lifecycle policies.
-- **Wrong AZ for an EBS volume.** Can't attach `vol-xxx` in `us-east-1a` to an instance in `us-east-1b` — snapshot and restore.
+- **Wrong AZ for an EBS volume.** Can't attach `vol-xxx` in `ap-southeast-1a` to an instance in `ap-southeast-1b` — snapshot and restore.
 - **Single ASG in a single AZ.** Outage takes the whole tier.
 - **ASG health-check-type=EC2 only.** Misses app crashes that don't kill the OS. Use `ELB`.
 - **No `HealthCheckGracePeriod`.** ASG kills instances mid-boot. Set 60-300s based on bootstrap time.

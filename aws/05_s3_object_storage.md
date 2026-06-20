@@ -16,7 +16,8 @@ A bucket name must be globally unique across **all AWS accounts in the world**. 
 ```bash
 BUCKET=acme-yati-aws-course-$(openssl rand -hex 4)
 
-aws s3api create-bucket --bucket $BUCKET --region us-east-1
+aws s3api create-bucket --bucket $BUCKET --region ap-southeast-1 \
+  --create-bucket-configuration LocationConstraint=ap-southeast-1
 # Note: outside us-east-1, you must add --create-bucket-configuration LocationConstraint=<region>
 
 # Block public access (do this FIRST, every time)
@@ -79,15 +80,15 @@ Every new bucket since 2018 ships with BPA on. **Leave it on.** Almost no produc
 
 S3 has 8+ storage classes with different cost/latency profiles. Pick wrong and you either overpay or hit retrieval cliffs.
 
-| Class | $/GB/mo (us-east-1) | Retrieval | First-byte latency | Min duration | Use case |
+| Class | $/GB/mo (ap-southeast-1) | Retrieval | First-byte latency | Min duration | Use case |
 |---|---|---|---|---|---|
-| **Standard** | $0.023 | Free | ms | none | Hot data, daily access |
+| **Standard** | $0.025 | Free | ms | none | Hot data, daily access |
 | **Intelligent-Tiering** | tiered automatically | Free | ms (frequent), 12hr (deep archive) | none | Unknown/changing access patterns — set-and-forget |
-| **Standard-IA** | $0.0125 | $0.01/GB | ms | 30 days | Infrequent but immediate access |
-| **One Zone-IA** | $0.01 | $0.01/GB | ms | 30 days | Re-creatable IA data |
-| **Glacier Instant Retrieval** | $0.004 | $0.03/GB | ms | 90 days | Quarterly access |
-| **Glacier Flexible Retrieval** | $0.0036 | $0.01/GB + min/hr retrieval delay | 1 min – 12 hr | 90 days | Backups |
-| **Glacier Deep Archive** | $0.00099 | $0.02/GB + 12-48 hr | 12-48 hr | 180 days | Compliance archive |
+| **Standard-IA** | $0.0138 | $0.01/GB | ms | 30 days | Infrequent but immediate access |
+| **One Zone-IA** | $0.011 | $0.01/GB | ms | 30 days | Re-creatable IA data |
+| **Glacier Instant Retrieval** | $0.005 | $0.03/GB | ms | 90 days | Quarterly access |
+| **Glacier Flexible Retrieval** | $0.0042 | $0.01/GB + min/hr retrieval delay | 1 min – 12 hr | 90 days | Backups |
+| **Glacier Deep Archive** | $0.002 | $0.02/GB + 12-48 hr | 12-48 hr | 180 days | Compliance archive |
 
 **The minimum duration matters.** Move an object to Glacier Deep Archive and delete it after a week → you still pay 180 days of storage. Treat lifecycle transitions as commitments.
 
@@ -171,7 +172,7 @@ aws s3api put-bucket-encryption --bucket $BUCKET --server-side-encryption-config
   "Rules": [{
     "ApplyServerSideEncryptionByDefault": {
       "SSEAlgorithm": "aws:kms",
-      "KMSMasterKeyID": "arn:aws:kms:us-east-1:123456789012:key/xxx"
+      "KMSMasterKeyID": "arn:aws:kms:ap-southeast-1:123456789012:key/xxx"
     },
     "BucketKeyEnabled": true
   }]
@@ -192,7 +193,7 @@ A short-lived signed URL that lets a holder GET or PUT an object without AWS cre
 
 ```python
 import boto3
-s3 = boto3.client("s3", region_name="us-east-1")
+s3 = boto3.client("s3", region_name="ap-southeast-1")
 url = s3.generate_presigned_url(
     "put_object",
     Params={"Bucket": "acme-uploads", "Key": "user-123/avatar.png", "ContentType": "image/png"},
@@ -237,7 +238,7 @@ Costs $0.04/GB on top of normal egress. Worth it for global users uploading mult
 - **Forgot to abort incomplete multipart uploads.** Silent cost. Add a lifecycle rule.
 - **Versioning enabled, no lifecycle for old versions.** Costs balloon. Add `NoncurrentVersionExpiration`.
 - **Lifecycle to Glacier for files < 128KB.** Below this size, transitions can cost more than they save (~$0.05 per 1000 transitions).
-- **Cross-region read in app code.** Reading `eu-west-1` bucket from `us-east-1` code = inter-region transfer at $0.02/GB and high latency. Replicate, or put compute next to data.
+- **Cross-region read in app code.** Reading `eu-west-1` bucket from `ap-southeast-1` code = inter-region transfer at $0.02/GB and high latency. Replicate, or put compute next to data.
 - **SSE-KMS without bucket keys** — KMS request charges dominate.
 - **Logs to the same bucket they're logging.** Recursive write loop. Use a separate logs bucket.
 - **Strong consistency assumed for *List* across regions** — S3 read-after-write is strong; replication is eventual.

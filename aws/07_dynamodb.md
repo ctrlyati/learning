@@ -139,7 +139,7 @@ Pay per request. Auto-scales instantly. Great for:
 - New apps where you haven't profiled traffic.
 - Spiky traffic.
 
-~$1.25 per million writes, $0.25 per million reads (us-east-1).
+~$1.25 per million writes, $0.25 per million reads (ap-southeast-1).
 
 ### Provisioned
 You set RCUs (Read Capacity Units) and WCUs (Write Capacity Units). Throttles if exceeded.

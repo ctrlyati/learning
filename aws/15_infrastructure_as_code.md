@@ -67,7 +67,7 @@ Deploy the same template across many accounts/regions from a central management 
 ```bash
 aws cloudformation create-stack-set --stack-set-name baseline --template-body file://template.yaml
 aws cloudformation create-stack-instances --stack-set-name baseline \
-  --accounts 111111111111 222222222222 --regions us-east-1 eu-west-1
+  --accounts 111111111111 222222222222 --regions ap-southeast-1 eu-west-1
 ```
 
 ---
@@ -104,12 +104,12 @@ class MyAppStack extends cdk.Stack {
 }
 
 const app = new cdk.App();
-new MyAppStack(app, "MyApp-Dev", { env: { account: "123", region: "us-east-1" } });
-new MyAppStack(app, "MyApp-Prod", { env: { account: "456", region: "us-east-1" } });
+new MyAppStack(app, "MyApp-Dev", { env: { account: "123", region: "ap-southeast-1" } });
+new MyAppStack(app, "MyApp-Prod", { env: { account: "456", region: "ap-southeast-1" } });
 ```
 
 ```bash
-cdk bootstrap aws://123/us-east-1   # one-time per account/region
+cdk bootstrap aws://123/ap-southeast-1   # one-time per account/region
 cdk diff
 cdk deploy MyApp-Dev
 ```
@@ -146,13 +146,13 @@ terraform {
   backend "s3" {
     bucket         = "myorg-tf-state"
     key            = "myapp/prod/terraform.tfstate"
-    region         = "us-east-1"
+    region         = "ap-southeast-1"
     dynamodb_table = "tf-lock"
     encrypt        = true
   }
 }
 
-provider "aws" { region = "us-east-1" }
+provider "aws" { region = "ap-southeast-1" }
 
 resource "aws_s3_bucket" "data" {
   bucket = "myapp-prod-${data.aws_caller_identity.this.account_id}"
@@ -269,8 +269,8 @@ A typical CDK + multi-account setup:
 // bin/app.ts
 const app = new cdk.App();
 const envs = {
-  dev:  { account: "111", region: "us-east-1" },
-  prod: { account: "222", region: "us-east-1" },
+  dev:  { account: "111", region: "ap-southeast-1" },
+  prod: { account: "222", region: "ap-southeast-1" },
 };
 for (const [name, env] of Object.entries(envs)) {
   const network = new NetworkStack(app, `Network-${name}`, { env });

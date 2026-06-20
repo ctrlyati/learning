@@ -110,7 +110,7 @@ You typically don't do this manually. Configure it in `~/.aws/config`:
 sso_session = my-sso
 sso_account_id = 123456789012
 sso_role_name = AdministratorAccess
-region = us-east-1
+region = ap-southeast-1
 
 [profile prod-readonly]
 source_profile = sandbox

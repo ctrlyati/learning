@@ -86,7 +86,7 @@ SELECT AVG(Duration) FROM "AWS/Lambda" WHERE FunctionName = 'myapp' GROUP BY Res
 - **Firelens** (FluentBit/Fluentd) for ECS — more control, multiple destinations.
 
 ### Retention — set it
-Default = forever. Common policy: 14-90 days for app logs, 365+ for audit. Cost: $0.03/GB ingested + $0.03/GB stored/mo (us-east-1) — log volume bills add up fast.
+Default = forever. Common policy: 14-90 days for app logs, 365+ for audit. Cost: $0.03/GB ingested + $0.03/GB stored/mo (ap-southeast-1) — log volume bills add up fast.
 
 ```bash
 aws logs put-retention-policy --log-group-name /aws/lambda/myapp --retention-in-days 14

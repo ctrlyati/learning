@@ -6,7 +6,7 @@ A collection of structured, self-paced deep-dive courses for programming languag
 
 ## 🗂️ Courses
 
-### 🐍 Languages
+### 🐍 Languages & Runtimes
 
 | Course | Focus | Modules |
 |--------|-------|---------|
@@ -15,6 +15,7 @@ A collection of structured, self-paced deep-dive courses for programming languag
 | [Rust](./rust/) | Ownership, lifetimes, traits, async, unsafe, FFI, production | 18 |
 | [JavaScript](./javascript/) | Core JS, event loop, DOM, Node, npm, tooling, production | 17 |
 | [TypeScript](./typescript/) | Type system, generics, mapped/utility types, real-world patterns | 16 |
+| [Node.js](./nodejs/) | Architecture, event loop, streams, networking, workers, clustering, perf | 9 |
 
 ### 🗄️ Databases
 
@@ -42,10 +43,11 @@ A collection of structured, self-paced deep-dive courses for programming languag
 | [LangChain & LangGraph](./langchain-langgraph/) | Python | LCEL, tool calling, statecharts, persistence, multi-agent architectures, evals | 7 |
 | [NestJS](./nestjs/) | TypeScript | DI, modules, controllers, pipes, guards, testing, production | 17 |
 
-### 🎨 Frontend / Full-stack Frameworks
+### 🎨 Frontend & UI Libraries
 
 | Course | Focus | Modules |
 |--------|-------|---------|
+| [React](./react/) | Fiber architecture, hooks deep-dive, concurrent features, forms, testing | 9 |
 | [Next.js](./nextjs/) | App Router, RSC, Server Actions, caching, auth, deployment | 17 |
 
 ---

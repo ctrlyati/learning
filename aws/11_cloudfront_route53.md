@@ -174,12 +174,12 @@ aws route53 create-health-check --caller-reference $(date +%s) --health-check-co
 ### Practical: multi-region active-active with failover
 ```
 www.example.com (latency-based, with health checks)
-  ├── A: us-east-1 ALB (health: /healthz)
+  ├── A: ap-southeast-1 ALB (health: /healthz)
   ├── A: eu-west-1 ALB (health: /healthz)
-  └── A: ap-south-1 ALB (health: /healthz)
+  └── A: us-east-1 ALB (health: /healthz)
 ```
 
-If `us-east-1` is unhealthy, latency-based won't return it; traffic shifts to next-fastest healthy region. No app changes.
+If `ap-southeast-1` is unhealthy, latency-based won't return it; traffic shifts to next-fastest healthy region. No app changes.
 
 ---
 

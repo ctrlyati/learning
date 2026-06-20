@@ -26,12 +26,12 @@ A private Docker registry per region per account. Supports image scanning, immut
 aws ecr create-repository --repository-name myapp --image-scanning-configuration scanOnPush=true \
   --image-tag-mutability IMMUTABLE
 
-aws ecr get-login-password --region us-east-1 | \
-  docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region ap-southeast-1 | \
+  docker login --username AWS --password-stdin 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com
 
 docker build -t myapp:v1 .
-docker tag myapp:v1 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp:v1
-docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp:v1
+docker tag myapp:v1 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/myapp:v1
+docker push 123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/myapp:v1
 ```
 
 ### Why `IMMUTABLE` tags
@@ -80,7 +80,7 @@ Tasks support multiple containers (sidecars: log shippers, proxies, agents). 1 t
   "taskRoleArn": "arn:aws:iam::...:role/myapp-task-role",
   "containerDefinitions": [{
     "name": "web",
-    "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp:v1",
+    "image": "123456789012.dkr.ecr.ap-southeast-1.amazonaws.com/myapp:v1",
     "portMappings": [{"containerPort": 8080, "protocol": "tcp"}],
     "environment": [{"name": "ENV", "value": "prod"}],
     "secrets": [{"name": "DB_PASSWORD", "valueFrom": "arn:aws:secretsmanager:..."}],
@@ -88,7 +88,7 @@ Tasks support multiple containers (sidecars: log shippers, proxies, agents). 1 t
       "logDriver": "awslogs",
       "options": {
         "awslogs-group": "/ecs/myapp",
-        "awslogs-region": "us-east-1",
+        "awslogs-region": "ap-southeast-1",
         "awslogs-stream-prefix": "web"
       }
     },

@@ -82,7 +82,7 @@ aws ce get-savings-plans-purchase-recommendation \
 ### 4.3 Data Transfer (DT)
 The cost line that surprises everyone. Key facts:
 - **DT IN to AWS: free** from internet.
-- **DT OUT to internet**: ~$0.09/GB (us-east-1), tiered down to $0.05/GB at petabytes.
+- **DT OUT to internet**: ~$0.12/GB (ap-southeast-1), tiered down to $0.05/GB at petabytes.
 - **DT between AZs**: $0.01/GB each way → **$0.02/GB round trip**. Chatty cross-AZ services = $$$.
 - **DT between regions**: $0.02/GB.
 - **DT via VPC peering** within a region: $0.01/GB each way.

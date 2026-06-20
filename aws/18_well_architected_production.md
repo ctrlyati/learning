@@ -77,7 +77,7 @@ Org-wide IAM guardrails. SCPs don't grant; they cap. Example: "no one (including
       "NotAction": ["iam:*","s3:*","cloudfront:*","route53:*","support:*"],
       "Resource": "*",
       "Condition": {
-        "StringNotEquals": { "aws:RequestedRegion": ["us-east-1","eu-west-1"] }
+        "StringNotEquals": { "aws:RequestedRegion": ["ap-southeast-1","us-east-1","eu-west-1"] }
       }
     }
   ]
@@ -268,22 +268,22 @@ Enforce via SCP / Config rules:
                                      │
                 ┌────────────────────┴────────────────────┐
                 ▼                                         ▼
-        ┌──────────────┐                          ┌──────────────┐
-        │  us-east-1   │                          │  eu-west-1   │
-        │              │                          │              │
-        │  CloudFront  │                          │  CloudFront  │
-        │      │       │                          │      │       │
-        │     WAF      │                          │     WAF      │
-        │      │       │                          │      │       │
-        │  API Gateway │                          │  API Gateway │
-        │      │       │                          │      │       │
-        │   Lambda/    │                          │   Lambda/    │
-        │   ECS Fargate│                          │   ECS Fargate│
-        │      │       │                          │      │       │
-        │  Aurora      │◄────── Global DB ────────►│  Aurora     │
-        │  DynamoDB    │◄──── Global Tables ──────►│  DynamoDB   │
-        │  S3 (CRR) ───┼──────────────────────────►│  S3 (CRR)   │
-        └──────────────┘                          └──────────────┘
+      ┌──────────────────┐                        ┌──────────────┐
+      │  ap-southeast-1  │                        │  eu-west-1   │
+      │                  │                        │              │
+      │  CloudFront      │                        │  CloudFront  │
+      │      │           │                        │      │       │
+      │     WAF          │                        │     WAF      │
+      │      │           │                        │      │       │
+      │  API Gateway     │                        │  API Gateway │
+      │      │           │                        │      │       │
+      │   Lambda/        │                        │   Lambda/    │
+      │   ECS Fargate    │                        │   ECS Fargate│
+      │      │           │                        │      │       │
+      │  Aurora          │◄────── Global DB ─────►│  Aurora      │
+      │  DynamoDB        │◄─── Global Tables ────►│  DynamoDB    │
+      │  S3 (CRR) ───────┼───────────────────────►│  S3 (CRR)   │
+      └──────────────────┘                        └──────────────┘
 ```
 
 **Underneath, in every account:**
