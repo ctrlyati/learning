@@ -2,9 +2,6 @@
 .memory
 **/exercises/**/done/
 
-# Playgrounds & Exercises
-gin/playground/
-langchain-langgraph/playground/
-golang/exercises/
-javascript/playground/
+**/playground/
+**/exercises/
 

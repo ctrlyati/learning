@@ -49,6 +49,7 @@ A collection of structured, self-paced deep-dive courses for programming languag
 |--------|-------|---------|
 | [React](./react/) | Fiber architecture, hooks deep-dive, concurrent features, forms, testing | 9 |
 | [Next.js](./nextjs/) | App Router, RSC, Server Actions, caching, auth, deployment | 17 |
+| [Next.js 16](./nextjs16/) | Next.js 16, Turbopack, proxy.ts, use cache, React 19 | 17 |
 
 ---
 
@@ -71,7 +72,7 @@ Suggested pacing: roughly one module per day for languages, databases, and frame
 - **Python backend:** Python → MySQL → FastAPI **or** Django → Docker → Kubernetes → one cloud
 - **AI / Agentic backend:** Python → FastAPI → LangChain & LangGraph → Docker → one cloud
 - **Go backend:** Go → MySQL → Gin → Docker → Kubernetes → one cloud
-- **Fullstack JS/TS:** JavaScript → TypeScript → NestJS **or** Next.js → Docker → one cloud
+- **Fullstack JS/TS:** JavaScript → TypeScript → NestJS **or** Next.js / Next.js 16 → Docker → one cloud
 - **Systems / performance:** Rust → Docker → Kubernetes
 - **Cloud / DevOps:** Docker → Kubernetes → AWS → Azure → IaC modules in both
 - **Interview cram:** Pick your language → MySQL → one framework → revisit interview Q&A sections
